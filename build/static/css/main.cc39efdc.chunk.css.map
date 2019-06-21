@@ -1,0 +1,1 @@
+{"version":3,"sources":["ManagerMain.css"],"names":[],"mappings":"AAAA,kBAEI,aAAa,CACb,gBACJ","file":"main.cc39efdc.chunk.css","sourcesContent":["#signOutBtn:hover{\n    /* background: black; */\n    color:#007bff;\n    border:'#007bff';\n}"]}

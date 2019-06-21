@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import firebase from '../firebase/firebase';
 
 interface Props {
+    history: any,
 }
 interface State {
     emailAddress: string,
@@ -16,19 +18,58 @@ class Login extends React.Component<Props, State> {
         this.state = {
             emailAddress: '',
             password: '',
+            
         }
     }
-    handleEmailChange(e: any) {
+
+    componentDidMount = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                firebase.firestore().collection('users').doc(user.uid).onSnapshot((info) => {
+                    // this.setState({ userInfo: info.data() })
+                    const userInfo = info.data();
+                    if (userInfo){
+                        if(userInfo.isManager){
+                            this.props.history.push('/managerMain');
+                        }else{
+                            this.props.history.push('/studentMain');
+                        }
+                    }
+                });
+            }
+
+        });
+    }
+
+    private userSignin = (email: any, password: any) => {
+        firebase.auth().signInWithEmailAndPassword(email, password).then((result) => {
+            console.log(result);
+            if (result.user) {
+                firebase.firestore().collection('users').doc(result.user.uid).onSnapshot((info) => {
+                    const userInfo = info.data();
+                    if (userInfo){
+                        if(userInfo.isManager){
+                            this.props.history.push('/managerMain');
+                        }else{
+                            this.props.history.push('/studentMain');
+                        }
+                    }
+                })
+            }
+        }).catch(function (error: any) {
+            console.log(error);
+        });
+    }
+
+    private handleEmailChange(e: any) {
         this.setState({ emailAddress: e.target.value });
     }
-    handlePWChange(e: any) {
+    private handlePWChange(e: any) {
         this.setState({ password: e.target.value });
     }
-    // renderErrorMsg() {
-    //     this.setState({ errorMsg: '' });
-    // }
 
     render() {
+        // this.checkUser();
         return (
             <div id="mainDiv" style={{ width: '100%', textAlign: 'center' }}>
                 <br></br><br></br>
@@ -68,15 +109,16 @@ class Login extends React.Component<Props, State> {
 
 
                         <br></br><br></br>
-                        <h6>If you do not have an account,</h6>
-                        <h6> click Signup button with email and password you want.</h6>
+                        {/* <h6>If you do not have an account,</h6>
+                        <h6> click Signup button with email and password you want.</h6> */}
                         <br></br>
-                        <Button id="loginBtn" variant='primary'
-                        // onClick={() => this.userLogin(this.state.emailAddress, this.state.password)}>Login</Button>
-                        >Login</Button>
+                        <Button id="loginBtn" variant='primary' style={{ marginRight: 10 }}
+                            onClick={() => this.userSignin(this.state.emailAddress, this.state.password)}>Sign in</Button>
+                        {/* >Sign in</Button> */}
+                        Or
                         <Button style={{ marginLeft: '10px' }} id="signupBtn" variant='success'
                         // onClick={() => this.userSignup(this.state.emailAddress, this.state.password)}>Signup</Button>
-                        >Signup</Button>
+                        ><Link to='/signup' style={{ textDecoration: 'none', color: 'white' }}> Sign up</Link></Button>
                         <br></br><br></br>
                         {/* <h5 style={{ color: 'red' }}>{this.state.errorMsg}</h5> */}
                     </form>
