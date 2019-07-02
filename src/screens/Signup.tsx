@@ -47,9 +47,15 @@ class Signup extends React.Component<Props, State> {
                                     lastName: this.state.lName,
                                     schoolName: this.state.schoolName,
                                     isManager: this.state.studentOrManager,
-                                    isConfirmed:false,
+                                    isConfirmed: false,
                                 }
-                            )
+                            ).then(() => {
+                                firebase.firestore().collection('classes').doc().set(
+                                    { name: this.state.schoolName }
+                                ).then((e)=>{
+                                    console.log(e);
+                                })
+                            })
                         :
                         firebase.firestore().collection('users').doc(result.user.uid)
                             .set(
@@ -165,7 +171,7 @@ class Signup extends React.Component<Props, State> {
                         <Col sm={10}>
                             <Form.Control as="select" onChange={(e: any) => { this.handleSchoolChange(e) }}>
                                 <option>School</option>
-                                <option>Dougls College</option>
+                                <option>Douglas College</option>
                                 <option>University of Douglas</option>
                                 <option>Douglas Institute of Technology</option>
                             </Form.Control>
@@ -187,16 +193,16 @@ class Signup extends React.Component<Props, State> {
                         <Col>
                             <div>
                                 <Button variant='success'>
-                                    <Link to='/' style={{color:'white', textDecoration:'none'}}>Sign in page</Link>
-                                    </Button>
-                            {this.state.userEmail && this.state.password ?
-                                <Button onClick={() => { this.signUp(this.state.userEmail, this.state.password)}}
-                                style={{marginLeft:100}}>
-                                    <Link to='/' style={{color:'white', textDecoration:'none'}}>Sign up</Link></Button> 
-                                :
-                                <Button type="submit" disabled
-                                style={{marginLeft:100}}> Sign up</Button>
-                            }
+                                    <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>Sign in page</Link>
+                                </Button>
+                                {this.state.userEmail && this.state.password ?
+                                    <Button onClick={() => { this.signUp(this.state.userEmail, this.state.password) }}
+                                        style={{ marginLeft: 100 }}>
+                                        <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>Sign up</Link></Button>
+                                    :
+                                    <Button type="submit" disabled
+                                        style={{ marginLeft: 100 }}> Sign up</Button>
+                                }
                             </div>
                         </Col>
                     </Form.Group>

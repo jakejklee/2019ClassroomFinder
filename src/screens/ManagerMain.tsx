@@ -4,6 +4,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import firebase from '../firebase/firebase';
 import '../css/ManagerMain.css';
 import ClassModal from '../components/ClassModal';
+import _ from 'lodash';
 
 interface Props {
     history: any,
@@ -15,6 +16,7 @@ interface State {
     isConfirmed: boolean,
     userID: string,
     userSchoolName: string,
+    schoolCode: string,
 }
 
 class ManagerMain extends React.Component<Props, State> {
@@ -28,6 +30,7 @@ class ManagerMain extends React.Component<Props, State> {
             isConfirmed: true,
             userID: '',
             userSchoolName: '',
+            schoolCode: '',
         }
     }
 
@@ -43,6 +46,16 @@ class ManagerMain extends React.Component<Props, State> {
                                 this.setState({ isConfirmed: true });
                                 this.setState({ userID: user.uid });
                                 this.setState({ userSchoolName: userInfo.schoolName });
+
+                                firebase.firestore().collection('classes').onSnapshot((result) => {
+                                    _.each(result.docs, (data) => {
+                                        const name = data.data().name;
+                                        const userSchoolName = this.state.userSchoolName;
+                                        if (name === userSchoolName) {
+                                            this.setState({ schoolCode: data.id });
+                                        }
+                                    })
+                                })
                             } else {
                                 this.setState({ isConfirmed: false });
 
@@ -73,13 +86,12 @@ class ManagerMain extends React.Component<Props, State> {
         this.setState({ classModal: true });
     }
     render() {
-        console.log(this.state.userID);
-        console.log(this.state.userSchoolName);
         const modalData = {
             modalType: this.state.modalType,
             modalHide: () => { this.setState({ classModal: false }) },
             modalOpen: this.state.classModal,
             schoolName: this.state.userSchoolName,
+            schoolCode: this.state.schoolCode,
         }
         if (this.state.isConfirmed) {
             return (
@@ -131,6 +143,10 @@ class ManagerMain extends React.Component<Props, State> {
             return (
                 <div>
                     Your account is not confirmed yet.
+                    <h6 id='signOutBtn' style={{
+                        border: '1px solid', width: 110, height: 40,
+                        lineHeight: '35px', marginTop: 10, cursor: 'pointer', borderRadius: 5
+                    }} onClick={() => this.signOut()}>Sign out</h6>
                 </div>
             );
         }
