@@ -4,6 +4,7 @@ import ManageClasses from './screens/ManageClasses';
 import ManagerMain from './screens/ManagerMain';
 import Signup from './screens/Signup';
 import StudentMain from './screens/StudentMain';
+import SearchResult from './screens/SearchResult';
 import { BrowserRouter as Router, Route, } from 'react-router-dom';
 
 interface Props {
@@ -20,6 +21,7 @@ class AppRouter extends React.Component<Props> {
                     <Route path="/managerMain" component={ManagerMain} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/studentMain" component={StudentMain} />
+                    <Route path="/SearchResult" component={SearchResult} />
                     {/* <Route path="/manageclasses" component={ManageClasses} /> */}
                 </div>
             </Router>

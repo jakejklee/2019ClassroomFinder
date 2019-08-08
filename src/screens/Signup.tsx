@@ -50,11 +50,12 @@ class Signup extends React.Component<Props, State> {
                                     isConfirmed: false,
                                 }
                             ).then(() => {
-                                firebase.firestore().collection('classes').doc().set(
-                                    { name: this.state.schoolName }
-                                ).then((e)=>{
-                                    console.log(e);
-                                })
+                                // firebase.firestore().collection('classes').doc().set(
+                                //     { name: this.state.schoolName }
+                                // ).then((e)=>{
+                                //     console.log(e);
+                                // })
+                                console.log('User added')
                             })
                         :
                         firebase.firestore().collection('users').doc(result.user.uid)
@@ -195,7 +196,7 @@ class Signup extends React.Component<Props, State> {
                                 <Button variant='success'>
                                     <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>Sign in page</Link>
                                 </Button>
-                                {this.state.userEmail && this.state.password ?
+                                {this.state.userEmail && this.state.password && this.state.schoolName?
                                     <Button onClick={() => { this.signUp(this.state.userEmail, this.state.password) }}
                                         style={{ marginLeft: 100 }}>
                                         <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>Sign up</Link></Button>

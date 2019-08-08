@@ -126,7 +126,10 @@ class ManagerMain extends React.Component<Props, State> {
                                 onClick={() => { this.clickBtn('remove') }}>Remove a class</Button>
                         </Col>
                         <Col md='auto' id='studentBtn' style={{ width: 300, height: 270, margin: 'auto', marginLeft: 0 }}>
-                            <Button style={{ width: '100%', height: '100%', fontWeight: btnFontWeight, fontSize: btnFontSize }}>Student screen</Button>
+                            <Link to='studentMain'>
+                                <Button style={{ width: '100%', height: '100%', fontWeight: btnFontWeight, fontSize: btnFontSize }}>Student screen</Button>
+                            </Link>
+
                         </Col>
 
                     </Row>
@@ -144,8 +147,8 @@ class ManagerMain extends React.Component<Props, State> {
                 <div>
                     Your account is not confirmed yet.
                     <h6 id='signOutBtn' style={{
-                        border: '1px solid', width: 110, height: 40,
-                        lineHeight: '35px', marginTop: 10, cursor: 'pointer', borderRadius: 5
+                        border: '1px solid', width: 110, height: 40, textAlign:'center',
+                        lineHeight: '35px', margin: 20, cursor: 'pointer', borderRadius: 5
                     }} onClick={() => this.signOut()}>Sign out</h6>
                 </div>
             );
