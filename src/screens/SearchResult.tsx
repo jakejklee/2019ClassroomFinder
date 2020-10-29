@@ -130,7 +130,7 @@ class SearchResult extends React.Component<Props, State> {
                         }}>
                             <Form.Label>{data.room}</Form.Label><br></br>
                             {'Class time :' + data.startHour + ':' + data.startMin + ' ~ ' +
-                                data.endHour + ':' + data.endMin + ' '}
+                                data.endHour + ':' + data.endMin + ', ' + data.subject + ', ' + data.title}
                         </div>
                     )
                 })
@@ -155,7 +155,7 @@ class SearchResult extends React.Component<Props, State> {
                                 margin: 'auto', marginBottom: 20, padding: 10, borderRadius: 10
                             }}>
                                 <Form.Label>Class Info</Form.Label><br></br>
-                                {data.room + ' : '+data.subject+', '+ data.title+' Ends at ' +
+                                {data.room + ' : ' + data.subject + ', ' + data.title + ' Ends at ' +
                                     data.endHour + ':' + data.endMin + ' '}
                             </div>
                         );
@@ -167,7 +167,7 @@ class SearchResult extends React.Component<Props, State> {
                                 margin: 'auto', marginBottom: 20, padding: 10, borderRadius: 10
                             }}>
                                 <Form.Label>Class Info</Form.Label><br></br>
-                                {data.room + ' : '+data.subject+', '+ data.title+' Starts at ' +
+                                {data.room + ' : ' + data.subject + ', ' + data.title + ' Starts at ' +
                                     data.startHour + ':' + data.startMin + ' '}
                             </div>
                         );

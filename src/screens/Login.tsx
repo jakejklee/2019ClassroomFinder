@@ -60,7 +60,9 @@ class Login extends React.Component<Props, State> {
             console.log(error);
         });
     }
-
+    private studentSignin = () => {
+        this.userSignin('student@douglascollege.ca', 'studentstudent');
+    }
     private handleEmailChange(e: any) {
         this.setState({ emailAddress: e.target.value });
     }
@@ -74,7 +76,7 @@ class Login extends React.Component<Props, State> {
             return (
                 <div id="mainDiv" style={{ width: '100%', textAlign: 'center' }}>
                     <br></br><br></br>
-                    <h1>Login</h1><br></br><br></br>
+                    <h1>Manager Login</h1><br></br><br></br>
 
                     <div id='formDiv' style={{
                         margin: 'auto',
@@ -113,13 +115,16 @@ class Login extends React.Component<Props, State> {
                             {/* <h6>If you do not have an account,</h6>
                         <h6> click Signup button with email and password you want.</h6> */}
                             <br></br>
+                            <Button id="loginBtn" variant='secondary' style={{ marginRight: 10, marginBottom: 10 }}
+                                onClick={() => this.studentSignin()}>Student Sign in</Button>
+                            <br></br>
                             <Button id="loginBtn" variant='primary' style={{ marginRight: 10 }}
-                                onClick={() => this.userSignin(this.state.emailAddress, this.state.password)}>Sign in</Button>
+                                onClick={() => this.userSignin(this.state.emailAddress, this.state.password)}>Manager Sign in</Button>
                             {/* >Sign in</Button> */}
                             Or
                         <Button style={{ marginLeft: '10px' }} id="signupBtn" variant='success'
                             // onClick={() => this.userSignup(this.state.emailAddress, this.state.password)}>Signup</Button>
-                            ><Link to='/signup' style={{ textDecoration: 'none', color: 'white' }}> Sign up</Link></Button>
+                            ><Link to='/signup' style={{ textDecoration: 'none', color: 'white' }}> Manager Sign up</Link></Button>
                             <br></br><br></br>
                             {/* <h5 style={{ color: 'red' }}>{this.state.errorMsg}</h5> */}
                         </form>
@@ -132,7 +137,7 @@ class Login extends React.Component<Props, State> {
             return (
                 <div id="mainDiv" style={{ width: '100%', textAlign: 'center' }}>
                     <br></br><br></br>
-                    <h1>Login</h1><br></br><br></br>
+                    <h1>Manager Login</h1><br></br><br></br>
 
                     <div id='formDiv' style={{
                         margin: 'auto',
@@ -168,16 +173,19 @@ class Login extends React.Component<Props, State> {
 
 
                             <br></br><br></br>
-                            {/* <h6>If you do not have an account,</h6>
-                        <h6> click Signup button with email and password you want.</h6> */}
+                            <h6>Students do not need Email and Password</h6>
+                            {/* <h6> click Signup button with email and password you want.</h6> */}
+                            <br></br>
+                            <Button id="loginBtn" variant='secondary' style={{ marginRight: 10, marginBottom: 10 }}
+                                onClick={() => this.studentSignin()}>Student Sign in</Button>
                             <br></br>
                             <Button id="loginBtn" variant='primary' style={{ marginRight: 10 }}
-                                onClick={() => this.userSignin(this.state.emailAddress, this.state.password)}>Sign in</Button>
+                                onClick={() => this.userSignin(this.state.emailAddress, this.state.password)}>Manager Sign in</Button>
                             {/* >Sign in</Button> */}
                             Or
                         <Button style={{ marginLeft: '10px' }} id="signupBtn" variant='success'
                             // onClick={() => this.userSignup(this.state.emailAddress, this.state.password)}>Signup</Button>
-                            ><Link to='/signup' style={{ textDecoration: 'none', color: 'white' }}> Sign up</Link></Button>
+                            ><Link to='/signup' style={{ textDecoration: 'none', color: 'white' }}> Manager Sign up</Link></Button>
                             <br></br><br></br>
                             {/* <h5 style={{ color: 'red' }}>{this.state.errorMsg}</h5> */}
                         </form>

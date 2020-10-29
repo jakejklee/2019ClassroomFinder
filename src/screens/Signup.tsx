@@ -103,7 +103,7 @@ class Signup extends React.Component<Props, State> {
             <div style={{ width: 700, margin: 'auto', textAlign: 'center' }}>
                 <h1>New account</h1>
                 <Form style={{ border: '1px solid', padding: 20, borderRadius: 20, marginTop: 20 }}>
-                    <fieldset>
+                    {/* <fieldset>
                         <Form.Group>
                             <Row>
                                 <Col>
@@ -127,7 +127,7 @@ class Signup extends React.Component<Props, State> {
                                 </Col>
                             </Row>
                         </Form.Group>
-                    </fieldset>
+                    </fieldset> */}
                     <Form.Group as={Row} controlId="formHorizontalEmail">
                         <Form.Label column sm={2}>
                             Email
@@ -170,15 +170,11 @@ class Signup extends React.Component<Props, State> {
                             School
                         </Form.Label>
                         <Col sm={10}>
-                            <Form.Control as="select" onChange={(e: any) => { this.handleSchoolChange(e) }}>
-                                <option>School</option>
-                                <option>Douglas College</option>
-                                <option>University of Douglas</option>
-                                <option>Douglas Institute of Technology</option>
-                            </Form.Control>
+                            <Form.Control type="text" placeholder="School Name"
+                                value={this.state.schoolName} onChange={(e: any) => { this.handleSchoolChange(e) }} />
                         </Col>
                     </Form.Group>
-                    {this.state.studentOrManager ? null :
+                    {/* {this.state.studentOrManager ? null :
                         <Form.Group as={Row} controlId="formHorizontalStudentID">
                             <Form.Label column sm={2}>
                                 Student ID
@@ -189,7 +185,7 @@ class Signup extends React.Component<Props, State> {
                             </Col>
                         </Form.Group>
 
-                    }
+                    } */}
                     <Form.Group as={Row}>
                         <Col>
                             <div>
